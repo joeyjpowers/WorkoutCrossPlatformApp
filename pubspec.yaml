@@ -29,6 +29,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  sqflite:
+  path:
+  path_provider:
+  url_launcher:
+
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -56,6 +61,9 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+
+  assets:
+    - assets/db/workouts.db
 
   # To add assets to your application, add an assets section, like this:
   # assets:

@@ -3,6 +3,7 @@ import './workoutplans.dart';
 import './home.dart';
 import './tracker.dart';
 import './navbar.dart';
+import './workoutplanresults.dart';
 
 void main() => runApp(App());
 
@@ -35,14 +36,21 @@ class _AppState extends State<App> {
     });
   }
 
+  void _setWorkoutPlanResults() {
+    setState(() {
+      _page = 3;
+    });
+  }
+
   Widget getPage(var page) {
     if (page == 1) {
-      return WorkoutPlans(_setHome);
+      return WorkoutPlans(_setHome, _setWorkoutPlanResults);
     } else if (page == 2) {
       return Tracker(_setHome);
-    }
-    else {
-      return Home(_setWorkoutPlan);
+    } else if (page == 3) {
+      return WorkoutPlanResults();
+    } else {
+      return Home(_setWorkoutPlan, _setTracker);
     }
   }
 

@@ -1,24 +1,49 @@
 import 'package:flutter/material.dart';
 
 class Home extends StatelessWidget {
-
   final VoidCallback setWorkoutPlan;
-  Home(this.setWorkoutPlan);
-
+  final VoidCallback setTracker;
+  Home(this.setWorkoutPlan, this.setTracker);
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Center(
-        child: RaisedButton(
-          child: Text("Workout Plans",
-            style: TextStyle(color: Colors.white, fontSize: 48),
+      child: Column(
+        children: <Widget>[
+          Center(
+            child: ButtonTheme(
+              minWidth: 300,
+              height: 100,
+              child: RaisedButton(
+                child: Text(
+                  "Workout Plans",
+                  style: TextStyle(color: Colors.white, fontSize: 48),
+                ),
+                color: Colors.red[900],
+                onPressed: setWorkoutPlan,
+              ),
+            ),
           ),
-          color: Colors.red[900],
-          onPressed: setWorkoutPlan,
-        ),
+          Center(
+            child: ButtonTheme(
+              minWidth: 200,
+              height: 100,
+              child: RaisedButton(
+                child: Text(
+                  "Set Tracker",
+                  style: TextStyle(color: Colors.white, fontSize: 48),
+                ),
+                color: Colors.red[900],
+                onPressed: setTracker,
+              ),
+            ),
+          ),
+        ],
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
       ),
       color: Colors.black54,
     );
+    //color: Colors.black54,
   }
 }
