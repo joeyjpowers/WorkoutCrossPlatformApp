@@ -4,8 +4,12 @@ import './home.dart';
 import './tracker.dart';
 import './navbar.dart';
 import './workoutplanresults.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() => runApp(App());
+void main() {
+  //WidgetsFlutterBinding.ensureInitialized();
+  runApp(App());
+}
 
 class App extends StatefulWidget {
   State<StatefulWidget> createState() {

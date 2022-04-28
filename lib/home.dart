@@ -10,7 +10,9 @@ class Home extends StatelessWidget {
     return Container(
       child: Column(
         children: <Widget>[
-          Center(
+          Container(
+      margin: EdgeInsets.all(20),
+      child: Center(
             child: ButtonTheme(
               minWidth: 300,
               height: 100,
@@ -23,8 +25,10 @@ class Home extends StatelessWidget {
                 onPressed: setWorkoutPlan,
               ),
             ),
-          ),
-          Center(
+          )),
+          Container(
+              margin: EdgeInsets.all(30),
+              child: Center(
             child: ButtonTheme(
               minWidth: 200,
               height: 100,
@@ -37,7 +41,7 @@ class Home extends StatelessWidget {
                 onPressed: setTracker,
               ),
             ),
-          ),
+          )),
         ],
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,

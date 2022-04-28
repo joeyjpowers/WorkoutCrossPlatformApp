@@ -4,6 +4,7 @@ import 'dart:io';
 import 'dart:convert';
 import 'package:flutter/services.dart';
 
+
 import 'package:path/path.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path_provider/path_provider.dart';
@@ -13,8 +14,9 @@ class Workouts {
   final String name;
   final String link;
   final int days;
+  final String website;
 
-  Workouts({this.id, required this.name, required this.link, required this.days});
+  Workouts({this.id, required this.name, required this.link, required this.days, required this.website});
 
   factory Workouts.fromRawJson(String str) => Workouts.fromJson(json.decode(str));
 
@@ -25,6 +27,7 @@ class Workouts {
     name: json['name'],
     link: json['link'],
     days: json['days'],
+    website: json['website'],
   );
 
   Map<String, dynamic> toJson() {
@@ -33,6 +36,7 @@ class Workouts {
       'name': name,
       'link': link,
       'days': days,
+      'website': website,
     };
   }
 
@@ -72,34 +76,16 @@ class WorkoutHelper {
     }
 
     _database = await openDatabase(path, readOnly: true);
-
- /*   // delete existing if any
-    await deleteDatabase(path);
-
-// Make sure the parent directory exists
-    try {
-      await Directory(dirname(path)).create(recursive: true);
-    } catch (_) {}
-
-// Copy from asset
-    ByteData data = await rootBundle.load(join("assets", "workouts.db"));
-    List<int> bytes = data.buffer.asUint8List(data.offsetInBytes, data.lengthInBytes);
-    await new File(path).writeAsBytes(bytes, flush: true);
-
-// open the database
-    _database = await openDatabase(path, readOnly: true);
- */
   }
 
   Future<List<Workouts>> getAllWorkouts() async {
     if (_database == null) {
-      _initDatabase();
+      await _initDatabase();
       //print("database: " + _database.toString());
     }
     late List<Map> workoutList;
     //print(_database);
     var tableNames = (await _database?.query('sqlite_master', where: 'type = ?', whereArgs: ['table']))?.map((row) => row['name'] as String).toList(growable: false);
-    //print(tableNames.toString());
 
 
     await _database?.transaction((txn) async {
@@ -109,8 +95,10 @@ class WorkoutHelper {
           "name",
           "link",
           "days",
+          "website",
         ],
       );
+
     });
 
     return workoutList.map((e) => Workouts.fromJson(e as Map<String, dynamic>)).toList();

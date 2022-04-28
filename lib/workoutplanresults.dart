@@ -31,7 +31,7 @@ class _WorkoutPlanResultsState extends State<WorkoutPlanResults> {
                             margin: EdgeInsets.all(20),
                             child: Center(
                               child: InkWell(
-                                child: Text(workouts.name, style: TextStyle(fontSize: 24, fontFamily: 'Roboto', color: Colors.white)),
+                                child: Column(children: [Text(workouts.name, style: TextStyle(fontSize: 24, fontFamily: 'Roboto', color: Colors.white)), Text(workouts.website)]),
                                 onTap: () async {
                                   var url = workouts.link;
                                   if (!await canLaunch(url))
