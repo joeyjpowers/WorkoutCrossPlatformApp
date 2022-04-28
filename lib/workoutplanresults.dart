@@ -6,6 +6,9 @@ import 'dart:async';
 class WorkoutPlanResults extends StatefulWidget {
   const WorkoutPlanResults({Key? key}) : super(key: key);
 
+  //String days;
+  //WorkoutPlanResults(this.days);
+
   @override
   State<WorkoutPlanResults> createState() => _WorkoutPlanResultsState();
 }

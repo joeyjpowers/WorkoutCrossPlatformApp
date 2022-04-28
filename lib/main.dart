@@ -20,7 +20,8 @@ class App extends StatefulWidget {
 
 class _AppState extends State<App> {
   var _page = 0; //set page to home
-  var _navBarIndex = 0;
+  //var _navBarIndex = 0;
+
 
   void _setHome() {
     setState(() {

@@ -35,6 +35,7 @@ dependencies:
   url_launcher:
   firebase_core: ^1.15.0
   firebase_database: ^9.0.12
+  multi_select_flutter: ^4.1.2
 
 
 
