@@ -27,6 +27,7 @@ class _AppState extends State<App> {
   double _numWorkouts = 0.0;
 
   var _sets = null;
+  var _names = null;
 
 
   void _setHome() {
@@ -60,10 +61,11 @@ class _AppState extends State<App> {
     });
   }
 
-  void _setSetTracker(List<String> sets) {
+  void _setSetTracker(List<String> sets, List<String> names) {
     setState(() {
       _page = 5;
       _sets = sets;
+      _names = names;
     });
   }
 
@@ -77,7 +79,7 @@ class _AppState extends State<App> {
     } else if (page == 4) {
       return PickSets(_numWorkouts, _setSetTracker);
     } else if (page == 5) {
-      return SetTracker(_sets, _setTracker);
+      return SetTracker(_sets, _names, _setTracker);
     } else {
       return Home(_setWorkoutPlan, _setTracker);
     }

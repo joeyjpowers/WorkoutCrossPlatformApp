@@ -3,11 +3,13 @@ import 'package:flutter/material.dart';
 class PickSets extends StatefulWidget {
   var _numWorkouts;
   var _numsets;
-  final Function(List<String>) _setSetTracker;
+  var _names;
+  final Function(List<String>, List<String>) _setSetTracker;
 
   PickSets(var numWorkouts, this._setSetTracker) {
     this._numWorkouts = numWorkouts;
     this._numsets = List<String>.filled(numWorkouts.round(), '3');
+    this._names = List<String>.filled(numWorkouts.round(), "");
 
   }
 
@@ -56,6 +58,7 @@ class _PickSetsState extends State<PickSets> {
                               border: OutlineInputBorder(),
                               labelText: 'Workout Name (optional)',
                             ),
+                            onChanged: (value) => (widget._names[index] = value),
                           ),
 
                         ),
@@ -127,7 +130,7 @@ class _PickSetsState extends State<PickSets> {
                     style: TextStyle(color: Colors.white, fontSize: 24),
                   ),
                   color: Colors.red[900],
-                  onPressed: () => (widget._setSetTracker(widget._numsets)),
+                  onPressed: () => (widget._setSetTracker(widget._numsets, widget._names)),
                 ),
               ),
           );
