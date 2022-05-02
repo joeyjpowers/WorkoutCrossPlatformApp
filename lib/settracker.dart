@@ -48,7 +48,7 @@ class _SetTrackerState extends State<SetTracker> {
               )
             else
               Text(
-                "$widget._names",
+                widget._names[index],
                 style: TextStyle(
                   fontSize: 24,
                   color: Colors.white,
