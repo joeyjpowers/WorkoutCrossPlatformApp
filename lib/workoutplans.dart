@@ -8,10 +8,6 @@ class WorkoutPlans extends StatefulWidget {
   String daysSelected = '2';//number of days for workout
   String weightType = 'Body Weight';
 
-  String get days {
-    return daysSelected;
-  }
-
   WorkoutPlans(this.setHome, this.setResults);
 
   @override

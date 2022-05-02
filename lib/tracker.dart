@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class Tracker extends StatefulWidget {
-  final VoidCallback setHome;
-  Tracker(this.setHome);
+  final Function(double) setPickSets;
+  Tracker(this.setPickSets);
 
   @override
   State<Tracker> createState() => _TrackerState();
@@ -33,13 +33,32 @@ class _TrackerState extends State<Tracker> {
         Slider(
           value: _numWorkouts,
           max: 6,
-          divisions: 6,
+          divisions: 5,
+          min: 1,
           label: _numWorkouts.round().toString(),
           onChanged: (double value) {
             setState(() {
               _numWorkouts = value;
             });
           },
+        ),
+        Container(
+          margin: EdgeInsets.only(left: 20, right: 20),
+          child: Row(
+            children: [
+              Text("1", style: TextStyle(color: Colors.white, fontSize: 18),),
+              Spacer(),
+              Text("2", style: TextStyle(color: Colors.white, fontSize: 18),),
+              Spacer(),
+              Text("3", style: TextStyle(color: Colors.white, fontSize: 18),),
+              Spacer(),
+              Text("4", style: TextStyle(color: Colors.white, fontSize: 18),),
+              Spacer(),
+              Text("5", style: TextStyle(color: Colors.white, fontSize: 18),),
+              Spacer(),
+              Text("6", style: TextStyle(color: Colors.white, fontSize: 18),),
+            ],
+          ),
         ),
         Spacer(),
         Center(
@@ -49,11 +68,13 @@ class _TrackerState extends State<Tracker> {
               alignment: Alignment.bottomCenter,
               child: RaisedButton(
                 child: Text(
-                  "Tracker Home",
+                  "Submit",
                   style: TextStyle(color: Colors.white, fontSize: 24),
                 ),
                 color: Colors.red[900],
-                onPressed: widget.setHome,
+                onPressed: () {
+                  widget.setPickSets(_numWorkouts);
+                },
               ),
             ),
           ),
