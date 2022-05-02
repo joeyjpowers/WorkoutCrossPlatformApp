@@ -5,6 +5,7 @@ import './tracker.dart';
 import './navbar.dart';
 import './workoutplanresults.dart';
 import './picksets.dart';
+import './settracker.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
 void main() {
@@ -24,6 +25,8 @@ class _AppState extends State<App> {
   //var _navBarIndex = 0;
 
   double _numWorkouts = 0.0;
+
+  var _sets = null;
 
 
   void _setHome() {
@@ -57,8 +60,14 @@ class _AppState extends State<App> {
     });
   }
 
+  void _setSetTracker(List<String> sets) {
+    setState(() {
+      _page = 5;
+      _sets = sets;
+    });
+  }
+
   Widget getPage(var page) {
-    print(page);
     if (page == 1) {
       return WorkoutPlans(_setHome, _setWorkoutPlanResults);
     } else if (page == 2) {
@@ -66,7 +75,9 @@ class _AppState extends State<App> {
     } else if (page == 3) {
       return WorkoutPlanResults();
     } else if (page == 4) {
-      return PickSets(_numWorkouts);
+      return PickSets(_numWorkouts, _setSetTracker);
+    } else if (page == 5) {
+      return SetTracker(_sets, _setTracker);
     } else {
       return Home(_setWorkoutPlan, _setTracker);
     }
