@@ -3,11 +3,15 @@ import 'package:flutter/material.dart';
 class SetTracker extends StatefulWidget {
   var _sets;
   var _names;
+  var _weights;
+  var _beenPressed;
   final VoidCallback _setTracker;
 
-  SetTracker(this._sets, this._names, this._setTracker);
-
-  var _beenPressed = new List.empty(growable: true);
+  SetTracker(this._sets, var names, this._setTracker) {
+    this._names = names;
+    this._weights = new List.filled(names.length, '0');
+    this._beenPressed = new List.empty(growable: true);
+  }
 
   @override
   State<SetTracker> createState() => _SetTrackerState();
@@ -63,54 +67,81 @@ class _SetTrackerState extends State<SetTracker> {
             );
           }
           var _workoutnum = index + 1;
-          return Column(children: [
-            if (widget._names[index] == "")
-              Text(
-                "Workout $_workoutnum",
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline,
-                ),
-              )
-            else
-              Text(
-                widget._names[index],
-                style: TextStyle(
-                  fontSize: 24,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            SizedBox(height: 10),
-            Row(
+          return Container(
+            margin: EdgeInsets.only(top: 20, left: 10, right: 10),
+            child: Column(
+                children: [
+              Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: List.generate(int.parse(widget._sets[index]), (index2) {
-                var _setNum = index2 + 1;
-                return Flexible(
-                  flex: 1,
-                  child: RaisedButton(
-                    child: new Text('$_setNum'),
-                    textColor: Colors.white,
-                    color: widget._beenPressed[_pressedMap["$index, $index2"]]
-                        ? Colors.green[900]
-                        : Colors.red[900],
-                    // 3
-                    onPressed: () => {
-                      setState(() {
-                        widget._beenPressed[_pressedMap["$index, $index2"]] =
-                            !widget
-                                ._beenPressed[_pressedMap["$index, $index2"]];
-                      })
-                    },
+                  children: [
+                Flexible(
+                  flex: 3,
+                  fit: FlexFit.loose,
+                child: (widget._names[index] == "") ?
+                Text(
+                  "Workout $_workoutnum",
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
                   ),
-                );
-              }),
-            ),
-            SizedBox(height: 20),
-          ]);
+                )
+              : Text(
+                  widget._names[index],
+                  style: TextStyle(
+                    fontSize: 24,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+          ),
+                SizedBox(width: 20),
+                Flexible(
+                  flex: 1,
+                  fit: FlexFit.loose,
+                  child: TextField(
+                    style: TextStyle(color: Colors.white),
+                    keyboardType: TextInputType.number,
+                    decoration: const InputDecoration(
+                      border: OutlineInputBorder(),
+                      labelText: 'Weight',
+                      labelStyle: TextStyle(color: Colors.white),
+                    ),
+                    onChanged: (value) => (widget._weights[index] = value),
+                  ),
+
+                ),
+              ]),
+              SizedBox(height: 10),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children:
+                    List.generate(int.parse(widget._sets[index]), (index2) {
+                  var _setNum = index2 + 1;
+                  return Flexible(
+                    flex: 1,
+                    child: RaisedButton(
+                      child: new Text('$_setNum'),
+                      textColor: Colors.white,
+                      color: widget._beenPressed[_pressedMap["$index, $index2"]]
+                          ? Colors.green[900]
+                          : Colors.red[900],
+                      // 3
+                      onPressed: () => {
+                        setState(() {
+                          widget._beenPressed[_pressedMap["$index, $index2"]] = !widget._beenPressed[_pressedMap["$index, $index2"]];
+                        })
+                      },
+                    ),
+                  );
+                }),
+              ),
+              SizedBox(height: 10,),
+
+            ]),
+          );
         }),
       ),
       color: Colors.black54,

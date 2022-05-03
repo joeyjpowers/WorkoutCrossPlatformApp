@@ -54,6 +54,7 @@ class _PickSetsState extends State<PickSets> {
                         Flexible(
                           flex: 3,
                           child: TextField(
+                            style: TextStyle(color: Colors.white),
                             decoration: const InputDecoration(
                               border: OutlineInputBorder(),
                               labelText: 'Workout Name (optional)',

@@ -8,7 +8,7 @@ class LastWorkout extends StatelessWidget {
     return Container(
         margin: EdgeInsets.only(top: 100),
         child: Text(
-          "You have no past workouts!\n\nUse the Set Tracker to add workouts or find a workout plan in Workout Plans!",
+          "You have no past workouts!\n\nUse the Set Tracker to add a workout or find a workout plan in Workout Plans!",
           style: TextStyle(fontSize: 28, color: Colors.white),
           textAlign: TextAlign.center,
         ),
