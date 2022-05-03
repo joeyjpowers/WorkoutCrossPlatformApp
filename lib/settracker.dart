@@ -6,7 +6,8 @@ class SetTracker extends StatefulWidget {
   final VoidCallback _setTracker;
 
   SetTracker(this._sets, this._names, this._setTracker);
-  var _hasBeenPressed = false;
+
+  var _beenPressed = new List.empty(growable: true);
 
   @override
   State<SetTracker> createState() => _SetTrackerState();
@@ -31,9 +32,36 @@ class _SetTrackerState extends State<SetTracker> {
       widget._names = List<String>.filled(widget._sets.length, "");
     }
 
+    var _pressedMap = new Map();
+    var _pressedNum = 0;
+
+    for (var i = 0; i < widget._sets.length; i++) {
+      for (var j = 0; j < int.parse(widget._sets[i]); j++) {
+        widget._beenPressed.add(false);
+        final coordinates = <String, int>{"$i, $j": _pressedNum++};
+        _pressedMap.addEntries(coordinates.entries);
+      }
+    }
+
     return Container(
       child: ListView(
-        children: List.generate(widget._sets.length, (index) {
+        children: List.generate(widget._sets.length + 1, (index) {
+          if (index == widget._sets.length) {
+            return Container(
+              margin: EdgeInsets.only(bottom: 8, top: 20),
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: RaisedButton(
+                  child: Text(
+                    "End Workout",
+                    style: TextStyle(color: Colors.white, fontSize: 24),
+                  ),
+                  color: Colors.red[900],
+                  onPressed: () => (widget._setTracker()),
+                ),
+              ),
+            );
+          }
           var _workoutnum = index + 1;
           return Column(children: [
             if (widget._names[index] == "")
@@ -66,19 +94,22 @@ class _SetTrackerState extends State<SetTracker> {
                   child: RaisedButton(
                     child: new Text('$_setNum'),
                     textColor: Colors.white,
-                    // 2
-                    color: widget._hasBeenPressed ? Colors.green[900] : Colors.red[900],
+                    color: widget._beenPressed[_pressedMap["$index, $index2"]]
+                        ? Colors.green[900]
+                        : Colors.red[900],
                     // 3
                     onPressed: () => {
                       setState(() {
-                        widget._hasBeenPressed = !widget._hasBeenPressed;
+                        widget._beenPressed[_pressedMap["$index, $index2"]] =
+                            !widget
+                                ._beenPressed[_pressedMap["$index, $index2"]];
                       })
                     },
                   ),
                 );
               }),
             ),
-            SizedBox(height: 10),
+            SizedBox(height: 20),
           ]);
         }),
       ),

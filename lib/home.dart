@@ -8,43 +8,23 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Column(
+      child: ListView(
         children: <Widget>[
           Container(
-      margin: EdgeInsets.all(20),
-      child: Center(
-            child: ButtonTheme(
-              minWidth: 300,
-              height: 100,
-              child: RaisedButton(
-                child: Text(
-                  "Workout Plans",
-                  style: TextStyle(color: Colors.white, fontSize: 48),
+            margin: EdgeInsets.only(top: 20),
+            child: Center(
+              child: Text(
+                "Welcome Back!",
+                style: TextStyle(
+                  fontSize: 36,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
-                color: Colors.red[900],
-                onPressed: setWorkoutPlan,
               ),
             ),
-          )),
-          Container(
-              margin: EdgeInsets.all(30),
-              child: Center(
-            child: ButtonTheme(
-              minWidth: 200,
-              height: 100,
-              child: RaisedButton(
-                child: Text(
-                  "Set Tracker",
-                  style: TextStyle(color: Colors.white, fontSize: 48),
-                ),
-                color: Colors.red[900],
-                onPressed: setTracker,
-              ),
-            ),
-          )),
+          ),
+          SizedBox(height: 10),
         ],
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
       ),
       color: Colors.black54,
     );
