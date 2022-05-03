@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './lastworkout.dart';
 
 class Home extends StatelessWidget {
   final VoidCallback setWorkoutPlan;
@@ -24,6 +25,9 @@ class Home extends StatelessWidget {
             ),
           ),
           SizedBox(height: 10),
+          Center(
+            child: LastWorkout(),
+          ),
         ],
       ),
       color: Colors.black54,
