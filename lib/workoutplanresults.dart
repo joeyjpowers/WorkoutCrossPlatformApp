@@ -27,11 +27,13 @@ class WorkoutPlanResults extends StatefulWidget {
 }
 
 class _WorkoutPlanResultsState extends State<WorkoutPlanResults> {
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
         color: Colors.black54,
-        child: Column(children: [
+        child: ListView(children: [
           Container(
             margin: EdgeInsets.only(top: 20),
             child: Text(
@@ -55,8 +57,7 @@ class _WorkoutPlanResultsState extends State<WorkoutPlanResults> {
                 if (snapshot.hasData) {
                   if (snapshot.data!.size > 0) {
                     return Center(
-                        child: ListView(
-                      shrinkWrap: true,
+                        child: Column(
                       children: snapshot.data!.docs.map((workoutPlan) {
                         return Container(
                             color: Colors.red[900],

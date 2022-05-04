@@ -22,6 +22,7 @@ class _SetTrackerState extends State<SetTracker> {
 
   @override
   Widget build(BuildContext context) {
+    //ensure sets is properly initialized
     if (widget._sets == null) {
       return Container(
         child: Center(
@@ -34,24 +35,26 @@ class _SetTrackerState extends State<SetTracker> {
       );
     }
 
+    //ensure names is properly initialized
     if (widget._names == null) {
       widget._names = List<String>.filled(widget._sets.length, "");
     }
 
-    var _pressedMap = new Map();
-    var _pressedNum = 0;
+    var _pressedMap = new Map(); //map for each button to see whether it has been pressed
+    var _pressedNum = 0; //var to set each index of pressedMap
 
     for (var i = 0; i < widget._sets.length; i++) {
       for (var j = 0; j < int.parse(widget._sets[i]); j++) {
         widget._beenPressed.add(false);
-        final coordinates = <String, int>{"$i, $j": _pressedNum++};
-        _pressedMap.addEntries(coordinates.entries);
+        final coordinates = <String, int>{"$i, $j": _pressedNum++}; //set map entry to coordinates
+        _pressedMap.addEntries(coordinates.entries); //add entry to map
       }
     }
 
     return Container(
       child: ListView(
         children: List.generate(widget._sets.length + 1, (index) {
+          //add end workout button at end
           if (index == widget._sets.length) {
             return Container(
               margin: EdgeInsets.only(bottom: 8, top: 20),
@@ -70,7 +73,7 @@ class _SetTrackerState extends State<SetTracker> {
               ),
             );
           }
-          var _workoutnum = index + 1;
+          //display set tracker for each workout
           return Container(
             margin: EdgeInsets.only(top: 20, left: 10, right: 10),
             child: Column(
@@ -81,9 +84,10 @@ class _SetTrackerState extends State<SetTracker> {
                 Flexible(
                   flex: 3,
                   fit: FlexFit.loose,
+                //see if name has been specified
                 child: (widget._names[index] == "") ?
                 Text(
-                  "Workout $_workoutnum",
+                  "Workout ${index + 1}",
                   style: TextStyle(
                     fontSize: 24,
                     color: Colors.white,
@@ -102,6 +106,7 @@ class _SetTrackerState extends State<SetTracker> {
                 ),
           ),
                 SizedBox(width: 20),
+                //input weight
                 Flexible(
                   flex: 1,
                   fit: FlexFit.loose,
@@ -119,6 +124,7 @@ class _SetTrackerState extends State<SetTracker> {
                 ),
               ]),
               SizedBox(height: 10),
+              //set tracker buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children:

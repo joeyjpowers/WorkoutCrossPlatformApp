@@ -19,7 +19,7 @@ class _TrackerState extends State<Tracker> {
         Container(
           child: Center(
             child: Text(
-              "How many workouts today?",
+              "How many exercises today?",
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 36,
