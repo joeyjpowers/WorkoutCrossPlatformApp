@@ -4,7 +4,7 @@ import './workouts.dart';
 class WorkoutPlans extends StatefulWidget {
 
   final VoidCallback setHome;
-  final VoidCallback setResults;
+  final Function(int, String) setResults;
   String daysSelected = '2';//number of days for workout
   String weightType = 'Body Weight';
 
@@ -63,7 +63,7 @@ class _WorkoutPlansState extends State<WorkoutPlans> {
                     widget.daysSelected = newValue!;
                   });
                 },
-                items: <String>['2', '3', '4', '5', '6']
+                items: <String>['2', '3', '4', '5', '6', 'Any']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -114,7 +114,7 @@ class _WorkoutPlansState extends State<WorkoutPlans> {
                     widget.weightType = newValue!;
                   });
                 },
-                items: <String>['Body Weight', 'Barbell', 'Dumbell', 'Kettlebell']
+                items: <String>['Body Weight', 'Barbell', 'Dumbell', 'Kettlebell', 'Any']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -138,10 +138,17 @@ class _WorkoutPlansState extends State<WorkoutPlans> {
                   style: TextStyle(color: Colors.white, fontSize: 24),
                 ),
                 color: Colors.red[900],
-                onPressed: widget.setResults,
+                onPressed: () {
+                  var days = 0;
+                  if (int.tryParse(widget.daysSelected) != null) {
+                    days = int.parse(widget.daysSelected);
+                  }
+                  widget.setResults(days, widget.weightType);
+                },
               ),
             ),
           ),
+
         ],
       ),
     );

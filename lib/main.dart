@@ -30,6 +30,8 @@ class _AppState extends State<App> {
 
   var _sets = null;
   var _names = null;
+  var _days = 0;
+  var _type = "";
 
 
   void _setHome() {
@@ -50,7 +52,9 @@ class _AppState extends State<App> {
     });
   }
 
-  void _setWorkoutPlanResults() {
+  void _setWorkoutPlanResults(int days, String type) {
+    _days = days;
+    _type = type;
     setState(() {
       _page = 3;
     });
@@ -77,7 +81,7 @@ class _AppState extends State<App> {
     } else if (page == 2) {
       return Tracker(_setPickSets);
     } else if (page == 3) {
-      return WorkoutPlanResults();
+      return WorkoutPlanResults(_days, _type);
     } else if (page == 4) {
       return PickSets(_numWorkouts, _setSetTracker);
     } else if (page == 5) {
