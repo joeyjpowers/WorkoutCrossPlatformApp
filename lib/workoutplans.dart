@@ -63,7 +63,7 @@ class _WorkoutPlansState extends State<WorkoutPlans> {
                     widget.daysSelected = newValue!;
                   });
                 },
-                items: <String>['2', '3', '4', '5', '6', 'Any']
+                items: <String>['2', '3', '4', '5', '6']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,
@@ -114,7 +114,7 @@ class _WorkoutPlansState extends State<WorkoutPlans> {
                     widget.weightType = newValue!;
                   });
                 },
-                items: <String>['Body Weight', 'Barbell', 'Dumbell', 'Kettlebell', 'Any']
+                items: <String>['Body Weight', 'Barbell', 'Dumbell', 'Kettlebell']
                     .map<DropdownMenuItem<String>>((String value) {
                   return DropdownMenuItem<String>(
                     value: value,

@@ -29,7 +29,6 @@ class WorkoutPlanResults extends StatefulWidget {
 class _WorkoutPlanResultsState extends State<WorkoutPlanResults> {
   @override
   Widget build(BuildContext context) {
-
     return Container(
         color: Colors.black54,
         child: Column(children: [
@@ -54,107 +53,82 @@ class _WorkoutPlanResultsState extends State<WorkoutPlanResults> {
                   .snapshots(),
               builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
                 if (snapshot.hasData) {
-                  return Center(
-                      child: ListView(
-                    shrinkWrap: true,
-                    children: snapshot.data!.docs.map((workoutPlan) {
-                      return Container(
-                          color: Colors.red[900],
-                          margin: EdgeInsets.all(20),
-                          child: Center(
-                            child: InkWell(
-                              child: Column(children: [
-                                Text(workoutPlan['name'],
-                                    style: TextStyle(
-                                        fontSize: 24,
-                                        fontFamily: 'Roboto',
-                                        color: Colors.white)),
-                                SizedBox(height: 5),
-                                Text("Wesbite: ${workoutPlan['website']}",
-                                    style: TextStyle(color: Colors.white)),
-                                SizedBox(height: 5),
-                                Text("Days per week: ${workoutPlan['days']}",
-                                    style: TextStyle(color: Colors.white)),
-                                SizedBox(height: 5),
-                                Text("Tags",
-                                    style: TextStyle(
-                                        color: Colors.white,
-                                        decoration: TextDecoration.underline)),
-                                (workoutPlan['barbell'])
-                                    ? Text("Barbell",
-                                        style: TextStyle(color: Colors.white))
-                                    : SizedBox.shrink(),
-                                (workoutPlan['bodyweight'])
-                                    ? Text("Body Weight",
-                                        style: TextStyle(color: Colors.white))
-                                    : SizedBox.shrink(),
-                                (workoutPlan['dumbell'])
-                                    ? Text("Dumbell",
-                                        style: TextStyle(color: Colors.white))
-                                    : SizedBox.shrink(),
-                                (workoutPlan['kettlebell'])
-                                    ? Text("Kettlebell",
-                                        style: TextStyle(color: Colors.white))
-                                    : SizedBox.shrink(),
-                              ]),
-                              onTap: () async {
-                                var url = workoutPlan['link'];
-                                if (!await launch(url))
-                                  throw 'Could not launch $url';
-                              },
-                            ),
-                          ));
-                    }).toList(),
-                  ));
-                } else if (snapshot.hasError) {
-                  print('${snapshot.error}');
-                  return Text("${snapshot.error}");
-                } else {
-                  return Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [Text("No Results were found")]);
-                }
-              }),
-        ]));
-  }
-}
-
-/*
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      color: Colors.black54,
-      child: FutureBuilder(
-          future: WorkoutHelper.instance.getAllWorkouts(),
-          builder:
-              (BuildContext context, AsyncSnapshot<List<Workouts>> snapshot) {
-            if (snapshot.hasData) {
-              return snapshot.data!.isEmpty
-                  ? Center(child: Text('No workouts were found.'))
-                  : ListView(
-                      children: snapshot.data!.map((workouts) {
+                  if (snapshot.data!.size > 0) {
+                    return Center(
+                        child: ListView(
+                      shrinkWrap: true,
+                      children: snapshot.data!.docs.map((workoutPlan) {
                         return Container(
                             color: Colors.red[900],
                             margin: EdgeInsets.all(20),
                             child: Center(
                               child: InkWell(
-                                child: Column(children: [Text(workouts.name, style: TextStyle(fontSize: 24, fontFamily: 'Roboto', color: Colors.white)), Text(workouts.website)]),
+                                child: Column(children: [
+                                  Text(workoutPlan['name'],
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          fontSize: 24,
+                                          fontFamily: 'Roboto',
+                                          color: Colors.white)),
+                                  SizedBox(height: 5),
+                                  Text("Wesbite: ${workoutPlan['website']}",
+                                      style: TextStyle(color: Colors.white)),
+                                  SizedBox(height: 5),
+                                  Text("Days per week: ${workoutPlan['days']}",
+                                      style: TextStyle(color: Colors.white)),
+                                  SizedBox(height: 5),
+                                  Text("Tags",
+                                      style: TextStyle(
+                                          color: Colors.white,
+                                          decoration:
+                                              TextDecoration.underline)),
+                                  (workoutPlan['barbell'])
+                                      ? Text("Barbell",
+                                          style: TextStyle(color: Colors.white))
+                                      : SizedBox.shrink(),
+                                  (workoutPlan['bodyweight'])
+                                      ? Text("Body Weight",
+                                          style: TextStyle(color: Colors.white))
+                                      : SizedBox.shrink(),
+                                  (workoutPlan['dumbell'])
+                                      ? Text("Dumbell",
+                                          style: TextStyle(color: Colors.white))
+                                      : SizedBox.shrink(),
+                                  (workoutPlan['kettlebell'])
+                                      ? Text("Kettlebell",
+                                          style: TextStyle(color: Colors.white))
+                                      : SizedBox.shrink(),
+                                ]),
                                 onTap: () async {
-                                  var url = workouts.link;
-                                  if (!await canLaunch(url))
-                                    launch(url);
-                                  else
-                                    print("Cannot launch " + url);
+                                  var url = workoutPlan['link'];
+                                  if (!await launch(url))
+                                    throw 'Could not launch $url';
                                 },
-                          ),
-                        ));
+                              ),
+                            ));
                       }).toList(),
-                    );
-            } else {
-              return Center(child: Text("Loading..."));
-            }
-          }),
-    );
-  }*/
-//}
+                    ));
+                  } else {
+                    return Container( margin: EdgeInsets.only(top: 10), child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        children: [
+                          Text("No Results were found",
+                              style:
+                                  TextStyle(color: Colors.white, fontSize: 28))
+                        ]));
+                  }
+                } else if (snapshot.hasError) {
+                  print('${snapshot.error}');
+                  return Text("${snapshot.error}");
+                } else {
+                  return Container( margin: EdgeInsets.only(top: 100), child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [CircularProgressIndicator()]));
+                }
+              }),
+
+        ]));
+  }
+}
