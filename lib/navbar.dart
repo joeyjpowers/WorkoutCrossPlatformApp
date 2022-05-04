@@ -1,54 +1,9 @@
 import 'package:flutter/material.dart';
 
-/*class NavBar extends StatelessWidget {
-  final VoidCallback setHome;
-  final VoidCallback setWorkoutPlan;
-  final VoidCallback setTracker;
-  int navBarIndex;
-
-  NavBar(this.setHome, this.setWorkoutPlan, this.setTracker, this.navBarIndex);
-
-  void _onTapped(int index) {
-    if (index == 0) {
-      setHome();
-    } else if (index == 1) {
-      setWorkoutPlan();
-    } else if (index == 2) {
-      setTracker();
-    }
-    navBarIndex = index;
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      items: const <BottomNavigationBarItem>[
-        BottomNavigationBarItem(
-          icon: Icon(Icons.home),
-          label: 'Home',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.local_fire_department),
-          label: 'Workout Plans',
-        ),
-        BottomNavigationBarItem(
-          icon: Icon(Icons.fitness_center_rounded),
-          label: 'Set Tracker',
-        ),
-      ],
-      backgroundColor: Colors.red[900],
-      currentIndex: navBarIndex,
-      selectedItemColor: Colors.black87,
-      unselectedItemColor: Colors.white,
-      onTap: _onTapped,
-    );
-  }
-}*/
-
 class NavBar extends StatefulWidget {
-  final VoidCallback setHome;
-  final VoidCallback setWorkoutPlan;
-  final VoidCallback setTracker;
+  final VoidCallback setHome; //change widget to home
+  final VoidCallback setWorkoutPlan; //change widget to workout plans
+  final VoidCallback setTracker; //change widget to set tracker
 
 
   NavBar(this.setHome, this.setWorkoutPlan, this.setTracker);
@@ -58,12 +13,14 @@ class NavBar extends StatefulWidget {
 }
 
 class _NavBarState extends State<NavBar> {
-  int _navBarIndex = 0;
+  int _navBarIndex = 0; //which nav bar button is pressed
 
   void _onTapped(int index) {
     setState(() {
-      _navBarIndex = index;
+      _navBarIndex = index; //change nav bar index when button is pressed
     });
+
+    //call corresponding widget
     if (index == 0) {
       widget.setHome();
     } else if (index == 1) {
@@ -71,7 +28,6 @@ class _NavBarState extends State<NavBar> {
     } else if (index == 2) {
       widget.setTracker();
     }
-
 
   }
 
@@ -83,6 +39,7 @@ class _NavBarState extends State<NavBar> {
       currentIndex: _navBarIndex,
       selectedItemColor: Colors.black87,
       unselectedItemColor: Colors.white,
+      //buttons on bar
       items: const <BottomNavigationBarItem>[
         BottomNavigationBarItem(
           icon: Icon(Icons.home),

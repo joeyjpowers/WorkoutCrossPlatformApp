@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import './lastworkout.dart';
 
+//Home page
+
 class Home extends StatelessWidget {
-  final VoidCallback setWorkoutPlan;
-  final VoidCallback setTracker;
-  Home(this.setWorkoutPlan, this.setTracker);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class Home extends StatelessWidget {
           ),
           SizedBox(height: 10),
           Center(
-            child: LastWorkout(),
+            child: LastWorkout(), //widget to get last workouts
           ),
         ],
       ),

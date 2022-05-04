@@ -10,7 +10,6 @@ import 'package:firebase_core/firebase_core.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  //await Firebase.initializeApp();
   runApp(App());
 }
 
@@ -22,51 +21,53 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
-  final Future<FirebaseApp> _workoutApp = Firebase.initializeApp();
-  var _page = 0; //set page to home
-  //var _navBarIndex = 0;
+  final Future<FirebaseApp> _workoutApp = Firebase.initializeApp(); //initialize firebase
+  var _page = 0; //keep track of page number
+  double _numWorkouts = 0.0; //number of workouts for picksets
+  var _sets = null; //sets array
+  var _names = null; //names array
+  var _days = 0; //days for workoutplanresults
+  var _type = ""; //weight type for workoutplanresults
 
-  double _numWorkouts = 0.0;
-
-  var _sets = null;
-  var _names = null;
-  var _days = 0;
-  var _type = "";
-
-
+  //set page to home page
   void _setHome() {
     setState(() {
       _page = 0;
     });
   }
 
+  //set page to workoutplans first page
   void _setWorkoutPlan() {
     setState(() {
       _page = 1;
     });
   }
 
+  //set page to tracker first page
   void _setTracker() {
     setState(() {
       _page = 2;
     });
   }
 
+  //set page to workout plans second page
   void _setWorkoutPlanResults(int days, String type) {
-    _days = days;
-    _type = type;
     setState(() {
       _page = 3;
+      _days = days;
+      _type = type;
     });
   }
 
+  //set page to tracker second page
   void _setPickSets(double numWorkouts) {
     setState(() {
-        _page = 4;
-        _numWorkouts = numWorkouts;
+      _page = 4;
+      _numWorkouts = numWorkouts;
     });
   }
 
+  //set page to third tracker page
   void _setSetTracker(List<String> sets, List<String> names) {
     setState(() {
       _page = 5;
@@ -75,6 +76,7 @@ class _AppState extends State<App> {
     });
   }
 
+  //display widget corresponding to page variable
   Widget getPage(var page) {
     if (page == 1) {
       return WorkoutPlans(_setHome, _setWorkoutPlanResults);
@@ -87,38 +89,44 @@ class _AppState extends State<App> {
     } else if (page == 5) {
       return SetTracker(_sets, _names, _setTracker);
     } else {
-      return Home(_setWorkoutPlan, _setTracker);
+      return Home();
     }
   }
 
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: FutureBuilder(
-        future: _workoutApp,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            print('You have an error! ${snapshot.error.toString()}');
-            return Container(
-              color: Colors.black54,
-              child: Text("Something went wrong!"),
-            );
-          } else if (snapshot.hasData) {
-            return Scaffold(
-              appBar: AppBar(
-                title: Center(
-                    child: Text("Workout App",
-                      style: TextStyle(fontSize: 28),)),
-                backgroundColor: Colors.red[900],
-              ),
-              body: getPage(_page),
-              bottomNavigationBar: NavBar(
-                  _setHome, _setWorkoutPlan, _setTracker),
-            );
-          } else {
-            return Center(child: CircularProgressIndicator());
-          }
-        }),
-
+      //setup firebase
+      home: FutureBuilder(
+          future: _workoutApp,
+          builder: (context, snapshot) {
+            if (snapshot.hasError) {
+              print('You have an error! ${snapshot.error.toString()}');
+              return Container(
+                color: Colors.black54,
+                child: Text("Something went wrong!"),
+              );
+            } else if (snapshot.hasData) {
+              return Scaffold(
+                //top bar
+                appBar: AppBar(
+                  title: Center(
+                      child: Text(
+                    "Workout App",
+                    style: TextStyle(fontSize: 28),
+                  )),
+                  backgroundColor: Colors.red[900],
+                ),
+                //page displayed
+                body: getPage(_page),
+                //bottom bar
+                bottomNavigationBar:
+                    NavBar(_setHome, _setWorkoutPlan, _setTracker),
+              );
+            } else {
+              //return loading while still loading
+              return Center(child: CircularProgressIndicator());
+            }
+          }),
     );
   }
 }
