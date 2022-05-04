@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_database/firebase_database.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:intl/intl.dart';
 
 
 class LastWorkout extends StatelessWidget {
-  final _database = FirebaseDatabase.instance.ref("last_workout");
 
   @override
   Widget build(BuildContext context) {
     return StreamBuilder(
         stream: FirebaseFirestore.instance
             .collection('last_workout')
-            .orderBy('date')
+            .orderBy('date', descending: true)
             .limit(3)
             .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> snapshot) {
