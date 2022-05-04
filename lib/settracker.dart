@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:workout_app/weightdatabase.dart';
 
 class SetTracker extends StatefulWidget {
   var _sets;
@@ -18,6 +19,7 @@ class SetTracker extends StatefulWidget {
 }
 
 class _SetTrackerState extends State<SetTracker> {
+
   @override
   Widget build(BuildContext context) {
     if (widget._sets == null) {
@@ -61,7 +63,9 @@ class _SetTrackerState extends State<SetTracker> {
                     style: TextStyle(color: Colors.white, fontSize: 24),
                   ),
                   color: Colors.red[900],
-                  onPressed: () => (widget._setTracker()),
+                  onPressed: () {
+                    WeightDatabase().addWeights(widget._names, widget._weights, widget._sets, widget._setTracker);
+                  },
                 ),
               ),
             );

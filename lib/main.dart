@@ -6,10 +6,11 @@ import './navbar.dart';
 import './workoutplanresults.dart';
 import './picksets.dart';
 import './settracker.dart';
-//import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
-  //WidgetsFlutterBinding.ensureInitialized();
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  //await Firebase.initializeApp();
   runApp(App());
 }
 
@@ -21,6 +22,7 @@ class App extends StatefulWidget {
 }
 
 class _AppState extends State<App> {
+  final Future<FirebaseApp> _workoutApp = Firebase.initializeApp();
   var _page = 0; //set page to home
   //var _navBarIndex = 0;
 
@@ -87,15 +89,32 @@ class _AppState extends State<App> {
 
   Widget build(BuildContext context) {
     return MaterialApp(
-        home: Scaffold(
-      appBar: AppBar(
-        title: Center(
-            child: Text("Workout App",
+        home: FutureBuilder(
+        future: _workoutApp,
+        builder: (context, snapshot) {
+          if (snapshot.hasError) {
+            print('You have an error! ${snapshot.error.toString()}');
+            return Container(
+              color: Colors.black54,
+              child: Text("Something went wrong!"),
+            );
+          } else if (snapshot.hasData) {
+            return Scaffold(
+              appBar: AppBar(
+                title: Center(
+                    child: Text("Workout App",
                       style: TextStyle(fontSize: 28),)),
-        backgroundColor: Colors.red[900],
-      ),
-      body: getPage(_page),
-      bottomNavigationBar: NavBar(_setHome, _setWorkoutPlan, _setTracker),
-    ));
+                backgroundColor: Colors.red[900],
+              ),
+              body: getPage(_page),
+              bottomNavigationBar: NavBar(
+                  _setHome, _setWorkoutPlan, _setTracker),
+            );
+          } else {
+            return Center(child: CircularProgressIndicator());
+          }
+        }),
+
+    );
   }
 }

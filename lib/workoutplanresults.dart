@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import './workouts.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'dart:async';
+import 'package:firebase_database/firebase_database.dart';
+import 'dart:math';
 
 class WorkoutPlanResults extends StatefulWidget {
   const WorkoutPlanResults({Key? key}) : super(key: key);
@@ -15,7 +14,22 @@ class WorkoutPlanResults extends StatefulWidget {
 
 class _WorkoutPlanResultsState extends State<WorkoutPlanResults> {
 
+  void referenceDatabase() {
+    DatabaseReference _testRef = FirebaseDatabase.instance.reference().child("test");
+    _testRef.set("Hello World ${Random().nextInt(100)}");
+  }
 
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      child: RaisedButton(
+        child: Text("Press me"),
+        onPressed: referenceDatabase,
+      ),
+    );
+  }
+
+  /*
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,5 +65,5 @@ class _WorkoutPlanResultsState extends State<WorkoutPlanResults> {
             }
           }),
     );
-  }
+  }*/
 }

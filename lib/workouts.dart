@@ -1,7 +1,9 @@
+import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'dart:io';
 import 'dart:convert';
+import 'dart:math';
 import 'package:flutter/services.dart';
 
 
@@ -40,6 +42,8 @@ class Workouts {
     };
   }
 
+
+
 }
 
 class WorkoutHelper {
@@ -48,6 +52,11 @@ class WorkoutHelper {
 
   static Database? _database;
   //Future<Database> get database async => _database ??= await _initDatabase();
+
+  void referenceDatabase() {
+    DatabaseReference _testRef = FirebaseDatabase.instance.ref().child("Test");
+    _testRef.set("Hello world ${Random().nextInt(100)}");
+  }
 
   Future<void> _initDatabase() async {
     //Directory documentsDirectory = await getApplicationDocumentsDirectory();
