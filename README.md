@@ -4,9 +4,9 @@
 
 I developed an app for Android and iOS using Flutter, Dart, and Firebase. My app allowed users to see options for workout plans based on different attributes, track sets for workouts while doing the workout, and store past workouts.
 
-##What I Learned ##
+## What I Learned ##
 
- * _Flutter and Dart_
+ * Flutter and Dart
  	* Widget based programming (widget trees, communicating between widgets)
  	* Stateful vs stateless
  	* Future builders
@@ -26,7 +26,7 @@ I developed an app for Android and iOS using Flutter, Dart, and Firebase. My app
  	* Learned how to recover code after deleting weeks of work
  	* Learned how to merge branches
 
-
+## Acknowledgements ##
 
 This app was developed as part of a Purdue 8-week CS49000 individual study course.
 Throughout this project, I was advised by Prof. Buster Dunsmore.
