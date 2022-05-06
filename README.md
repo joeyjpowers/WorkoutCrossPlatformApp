@@ -19,7 +19,7 @@ I developed an app for Android and iOS using Flutter, Dart, and Firebase. My app
  * Firebase
  	* Developing NoSQL database using Firestore
    	* Connecting database to app for real-time updates
-   	* Strengthened my understanding for collection/document based database storage
+   	* Strengthened my understanding of collection and document-based database storage
  * Figma
  	* Learned how to use Figma to create a design for an app
  * Git
