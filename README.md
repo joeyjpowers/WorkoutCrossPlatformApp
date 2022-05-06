@@ -1,16 +1,32 @@
-# workout_app
+# workout\_app #
 
-Flutter Individual Study Project
+## Project Description ##
 
-## Getting Started
+I developed an app for Android and iOS using Flutter, Dart, and Firebase. My app allowed users to see options for workout plans based on different attributes, track sets for workouts while doing the workout, and store past workouts.
 
-This project is a starting point for a Flutter application.
+##What I Learned ##
 
-A few resources to get you started if this is your first Flutter project:
+ * _Flutter and Dart_
+ 	* Widget based programming (widget trees, communicating between widgets)
+ 	* Stateful vs stateless
+ 	* Future builders
+ 	* Input streams
+ 	* Communication with NoSQL database from code
+ 	* App design
+ 	* Developing applications for multiple platforms
+ 	* Testing on different emulators
+ 	* Configurations for iOS and Android
+ * Firebase
+ 	* Developing NoSQL database using Firestore
+   	* Connecting database to app for real-time updates
+   	* Strengthened my understanding for collection/document based database storage
+ * Figma
+ 	* Learned how to use Figma to create a design for an app
+ * Git
+ 	* Learned how to recover code after deleting weeks of work
+ 	* Learned how to merge branches
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+This app was developed as part of a Purdue 8-week CS49000 individual study course.
+Throughout this project, I was advised by Prof. Buster Dunsmore.
