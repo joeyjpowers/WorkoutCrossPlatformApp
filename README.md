@@ -1,4 +1,4 @@
-# workout\_app #
+# Cross Platform Workout App #
 
 ## Project Description ##
 
