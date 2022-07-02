@@ -2,7 +2,7 @@
 
 ## Project Description ##
 
-I developed an app for Android and iOS using Flutter, Dart, and Firebase. My app allowed users to see options for workout plans based on different attributes, track sets for workouts while doing the workout, and store past workouts.
+I developed an app for Android and iOS using Flutter, Dart, and Firebase. My app allows users to see options for workout plans based on different attributes, track sets for workouts while doing the workout, and store past workouts.
 
 ## What I Learned ##
 
